@@ -29,7 +29,7 @@ Player::Player(SDL_Renderer* renderer ,int x, int y) {
     srcRect.w = FRAME_WIDTH;
     srcRect.h = FRAME_HEIGHT;
 
-    SDL_Surface* surface = SDL_LoadBMP("romfs:/sprites/player1/player_1_spritesheet.bmp");
+    SDL_Surface* surface = SDL_LoadBMP("romfs:/sprites/player/blue/blue_spritesheet.bmp");
     if (!surface) {
         printf("Kon test.bmp niet laden: %s\n", SDL_GetError());
         texture = nullptr;

@@ -38,6 +38,7 @@ To-Do:
     - Main entrypoint
     - Main loop
     - handle events
+    - Player customization
 
 - Player class
     - Player movement
