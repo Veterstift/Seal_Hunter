@@ -1,6 +1,7 @@
 player.o: \
  C:/Users/User-1-1/Nintendo/Homebrews/Seal_Hunter/source/player.cpp \
  C:/Users/User-1-1/Nintendo/Homebrews/Seal_Hunter/source/player.h \
+ C:/Users/User-1-1/Nintendo/Homebrews/Seal_Hunter/source/weapon.h \
  C:/devkitPro/portlibs/switch/include/SDL2/SDL.h \
  C:/devkitPro/portlibs/switch/include/SDL2/SDL_main.h \
  C:/devkitPro/portlibs/switch/include/SDL2/SDL_stdinc.h \
@@ -227,6 +228,7 @@ player.o: \
  C:/devkitPro/portlibs/switch/include/SDL2/SDL.h \
  C:/devkitPro/portlibs/switch/include/SDL2/SDL_timer.h
 C:/Users/User-1-1/Nintendo/Homebrews/Seal_Hunter/source/player.h:
+C:/Users/User-1-1/Nintendo/Homebrews/Seal_Hunter/source/weapon.h:
 C:/devkitPro/portlibs/switch/include/SDL2/SDL.h:
 C:/devkitPro/portlibs/switch/include/SDL2/SDL_main.h:
 C:/devkitPro/portlibs/switch/include/SDL2/SDL_stdinc.h:

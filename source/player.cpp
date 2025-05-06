@@ -36,6 +36,13 @@ Player::Player(SDL_Renderer* renderer ,int x, int y) {
         return;
     }
 
+    this->renderer = renderer;
+
+    weapons.push_back(new Weapon(WeaponType::Pistol, renderer)); // Start met pistool
+    currentWeaponIndex = 0;
+
+    
+
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
 }
@@ -45,9 +52,10 @@ Player::~Player() {
     if (texture) {
         SDL_DestroyTexture(texture);
     }
+    for (auto w : weapons) delete w;
 }
 
-void Player::handleInput(const u64 kHeld) {
+void Player::handleInput(const u64 kHeld, const u64 kDown) {
     bool moving = false;
 
     if (isGettingUp) return;
@@ -56,6 +64,10 @@ void Player::handleInput(const u64 kHeld) {
     if (kHeld & HidNpadButton_Down)  { rect.y += speed; moving = true; }
     if (kHeld & HidNpadButton_Left)  { rect.x -= speed; moving = true; }
     if (kHeld & HidNpadButton_Right) { rect.x += speed; moving = true; }
+
+    if (kDown & HidNpadButton_X) {
+        switchWeapon(); // Wapen wisselen
+    }
 
     if (moving) {
         lastInputTime = SDL_GetTicks();
@@ -141,4 +153,41 @@ void Player::render(SDL_Renderer* renderer) {
         SDL_RenderFillRect(renderer, &rect);
     }
     
+    // Render het wapen iets rechts van de speler
+    Weapon* weapon = weapons[currentWeaponIndex];
+    SDL_Texture* weaponTexture = weapon->getTexture();
+
+    if (weaponTexture) {
+        SDL_Rect weaponRect;
+        weaponRect.w = 16;
+        weaponRect.h = 8;
+        weaponRect.x = rect.x; // rechts van speler
+        weaponRect.y = rect.y + rect.h / 2 - weaponRect.h / 2;
+
+        SDL_RenderCopy(renderer, nullptr, nullptr, &weaponRect);
+        SDL_RenderCopy(renderer, weaponTexture, nullptr, &weaponRect);
+    }
+}
+
+void Player::switchWeapon() {
+    if (weapons.size() > 1) {
+        currentWeaponIndex = (currentWeaponIndex + 1) % weapons.size();
+    }
+}
+
+void Player::unlockWeapon(WeaponType type) {
+    bool alreadyUnlocked = false;
+    for (Weapon* w : weapons) {
+        if (w->getType() == type) {
+            alreadyUnlocked = true;
+            break;
+        }
+    }
+    if (!alreadyUnlocked) {
+        weapons.push_back(new Weapon(type, renderer));
+    }
+}
+
+Weapon* Player::getCurrentWeapon() const {
+    return weapons[currentWeaponIndex];
 }

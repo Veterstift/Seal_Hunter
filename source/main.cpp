@@ -23,9 +23,16 @@ bool quit = false;
 void handleEvents(PadState* pad, Player& player) {
     u64 kHeld = padGetButtons(pad); // Knoppen die nu worden ingedrukt
     u64 kDown = padGetButtonsDown(pad); // Knoppen die nu worden ingedrukt en ook 
-    player.handleInput(kHeld);
+    player.handleInput(kHeld, kDown);
 
+    if (kDown & HidNpadButton_X) {
+        player.switchWeapon(); // Wapen wisselen
+    }
     if (kDown & HidNpadButton_Plus) {quit = true;}
+
+    // if (kDown & HidNpadButton_X) {
+    //     player.switchWeapon(); // Wapen wisselen
+    // }
 }
 
 /*//////////////////////////////////////////////////////////////////////

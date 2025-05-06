@@ -31,44 +31,89 @@ Links:
 - GitHub:   https://github.com/Veterstift/SealHunter
 - Assets:   https://shpro.de.tl/GuidesTipsTricks.htm
 
---------------------------------------------------------------------
-To-Do:
+=====================================================================
+📁 Seal Hunter/
+│
+├── main.cpp                 // Entry point: bevat alleen de game loop
+├── player.cpp / .h          // Alles omtrent speler (init, render, beweging, animatie)
+├── enemy.cpp / .h           // Voor vijandlogica, bv. brown_seal
+├── weapon.cpp / .h          // Voor wapenlogica (init, render, currentWeapon, maxBullets, reloadTime)
+├── bullets.cpp / .h         // Afvuren, bijhouden, renderen en herladen van kogels
+├── physics.cpp / .h         // Shells, blood physics & rendering
+├── game.cpp / .h            // HUD rendering (wapens bar, bullet count, score, crosshair)
+├── assets.cpp / .h          // Laadt en beheert alle textures, fonts en geluiden
+├── menus.cpp / .h           // Startmenu, pauzemenu, optiesmenu, menu-invoer
+├── config.h                 // Globale constants en instellingen
+└── utils.cpp / .h           // Handige functies zoals `renderText()`, random helpers
 
-- Main class
-    - Main entrypoint
-    - Main loop
-    - handle events
-    - Player customization
+======================================================================
+1. main.cpp
+    * Main entry point of the game.
+    * Initializes SDL2 and sets up the game window.
+    * Handles game loop and event handling.
 
-- Player class
-    - Player movement
-    - Player jumping
-    - Player kicking
-    - Player idle animation
-    - Player weapon selection
+2. Player.h / Player.cpp
+    * struct Player
+    * initPlayer(SDL_Renderer*)
+    * handlePlayerMovement(PadState*)
+    * renderPlayer(SDL_Renderer*)
 
-- Player weapon class extends player class
-    - Player weapon type
-    - Player weapon damage
-    - Player weapon buying
-    - Player weapon crosshair
+3. Enemy.h / Enemy.cpp
+    * struct Enemy
+    * initEnemy(SDL_Renderer*)
+    * updateEnemy()
+    * renderEnemy(SDL_Renderer*)
 
-- Enemy class
-    - Enemy movement
-    - Enemy health
-    - Enemy type
-    - Enemy spawn
+4. Bullets.h / Bullets.cpp
+    * struct Bullet
+    * vector<Bullet> bullets
+    * shootBullet()
+    * updateBullet()
+    * renderBullet(SDL_Renderer*)
+    * renderBulletCount(SDL_Renderer*)
+    * startReloading()
+    * updateReloading()
 
-- Game class
-    - Level waves
-    - Level progression bar
-    - Game Over barrier
-    - Points system
+5. Shells.h / Shells.cpp
+    * struct Shell
+    * vector<Shell> shells
+    * initShellTextures(SDL_Renderer*)
+    * updateShells()
+    * renderShells(SDL_Renderer*)
 
-- UI class
-    - Main menu
-    - Pause/Play button
-    - Game Over screen
+6. MuzzleFlash.h / MuzzleFlash.cpp
+    * initMuzzleFlash(SDL_Renderer*)
+    * renderMuzzleFlash(SDL_Renderer*)
+
+7. UI.h / UI.cpp
+    * renderText(...)
+    * renderHUD(SDL_Renderer*)
+    * initHUD(SDL_Renderer*)
+    * initWeapons(SDL_Renderer*)
+
+8. GameState.h / GameState.cpp
+    * enum GameState, 
+    * renderStartMenu(SDL_Renderer*)
+    * handleStartMenuInput(PadState*)
+    * renderPauseMenu(SDL_Renderer*)
+    * handlePauseMenuInput(PadState*)
+    * renderOptionsMenu(SDL_Renderer*)
+    * handleOptionsMenuInput(PadState*)
+    * renderGameOverMenu(SDL_Renderer*)
+    * handleGameOverMenuInput(PadState*)
+    * updateGameState()
+    * renderGameState(SDL_Renderer*)
+
+9. Environment.h / Environment.cpp
+    * initBackdropAndIce(SDL_Renderer*)
+    * renderBackdropAndIce(SDL_Renderer*)
+
+10. InputHandler.h / InputHandler.cpp
+    * handleEvents(PadState*)
+
+11. Resources.h / Resources.cpp
+    * loadResources()
+    * unloadResources()
 
 -------------------------------------------------------------------
 Spritesheets:
